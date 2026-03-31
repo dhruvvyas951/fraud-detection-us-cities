@@ -65,41 +65,6 @@ The dataset lacks an explicit fraud label. We engineer a multi-criteria anomaly 
 
 **Result:** 350 fraudulent transactions (13.93% fraud rate)
 
-## Project Structure
-
-```
-fraud-detection-project/
-├── README.md                  # This file
-├── requirements.txt           # Python dependencies
-├── LICENSE                    # MIT License
-├── .gitignore                 # Git ignore rules
-│
-├── data/
-│   └── bank_transactions_data_2.csv   # Raw dataset (from Kaggle)
-│
-├── notebooks/
-│   └── Bank_Transaction_Fraud_Detection_Notebook.ipynb  # Jupyter notebook (full pipeline)
-│
-├── src/
-│   └── main.py                # Standalone Python pipeline script
-│
-├── images/                    # Generated EDA plots (auto-created by pipeline)
-│   ├── 01_fraud_distribution.png
-│   ├── 02_fraud_by_location.png
-│   ├── 03_fraud_by_channel_type.png
-│   ├── 04_fraud_by_occupation_age.png
-│   ├── 05_transaction_amount.png
-│   ├── 06_temporal_patterns.png
-│   ├── 07_correlation_heatmap.png
-│   ├── 08_confusion_matrices.png
-│   ├── 09_roc_curves.png
-│   └── 10_feature_importance.png
-│
-└── outputs/
-    ├── Fraud_Detection_IEEE_Paper.docx  # IEEE-format research paper
-    └── fraud_hotspot_map.html           # Interactive Folium map (auto-generated)
-```
-
 ## Setup and Installation
 
 ### Prerequisites
@@ -108,82 +73,21 @@ fraud-detection-project/
 - pip (Python package manager)
 - Git
 
-### Step 1: Clone the Repository
+### Step 1: Download the IPYNB file
 
-```bash
-git clone https://github.com/<your-username>/fraud-detection-bank-transactions.git
-cd fraud-detection-bank-transactions
-```
+### Step 2: Download the Dataset
 
-### Step 2: Create a Virtual Environment (Recommended)
-
-```bash
-# Create virtual environment
-python -m venv venv
-
-# Activate it
-# On Windows:
-venv\Scripts\activate
-# On macOS/Linux:
-source venv/bin/activate
-```
-
-### Step 3: Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### Step 4: Download the Dataset
-
-The dataset is included in `data/`. If you need to re-download it:
+The dataset is included. If you need to re-download it:
 
 1. Go to [Kaggle Dataset Page](https://www.kaggle.com/datasets/valakhorasani/bank-transaction-dataset-for-fraud-detection)
 2. Download `bank_transactions_data_2.csv`
-3. Place it in the `data/` directory
 
-## How to Run
-
-### Option A: Run the Python Pipeline (Recommended)
-
-```bash
-python src/main.py
-```
-
-This runs the entire 7-stage pipeline and saves all plots to `images/` and the fraud hotspot map to `outputs/fraud_hotspot_map.html`.
-
-### Option B: Run the Jupyter Notebook
-
-```bash
-# Install Jupyter if not already installed
-pip install jupyter
-
-# Launch notebook
-jupyter notebook notebooks/Bank_Transaction_Fraud_Detection_Notebook.ipynb
-```
-
-### Option C: Run on Google Colab
+### Run on Google Colab
 
 1. Upload `Bank_Transaction_Fraud_Detection_Notebook.ipynb` to [Google Colab](https://colab.research.google.com/)
 2. Upload `bank_transactions_data_2.csv` to the Colab session
-3. Add this cell at the top and run it:
-   ```python
-   !pip install folium
-   ```
-4. Update the CSV path in the first code cell to match your upload location
-5. Run All Cells
-
-## Pipeline Stages
-
-| Stage | Description | Key Outputs |
-|-------|-------------|-------------|
-| 1. Data Loading | Load CSV, inspect shape/types/nulls | Dataset overview |
-| 2. Data Cleaning | Datetime conversion, fraud label engineering | IsFraud column (13.93% fraud rate) |
-| 3. EDA | 8 visualization sections including fraud hotspot map | 10 plots + interactive map |
-| 4. Statistical Testing | 4 hypothesis tests (t-test, chi-square, Mann-Whitney) | p-values and conclusions |
-| 5. Feature Engineering | Label encoding, scaling, temporal features, 80/20 split | 12-feature training set |
-| 6. ML Modeling | Logistic Regression, Random Forest, Gradient Boosting | Model predictions |
-| 7. Evaluation | Confusion matrices, ROC curves, feature importance | Performance comparison |
+3. Update the CSV path in the first code cell to match your upload location
+4. Run All Cells
 
 ## Key Findings
 
@@ -238,32 +142,3 @@ The pipeline generates an interactive Folium map saved to `outputs/fraud_hotspot
 | Machine Learning | scikit-learn (Logistic Regression, Random Forest, Gradient Boosting) |
 | Statistics | SciPy (t-test, chi-square, Mann-Whitney U) |
 | Notebook | Jupyter / Google Colab |
-
-## Research Paper
-
-The IEEE-formatted research paper is available at `outputs/Fraud_Detection_IEEE_Paper.docx`. It follows the standard structure:
-
-1. Introduction
-2. Related Work
-3. Dataset and Methodology
-4. Results and Analysis
-5. Discussion
-6. Limitations
-7. Conclusion and Future Work
-
-## Future Work
-
-- Apply SMOTE/ADASYN for advanced oversampling
-- Evaluate deep learning models (LSTM for sequential transactions)
-- Incorporate IP address geolocation cross-referencing
-- Test on larger real-world datasets with confirmed fraud labels
-- Develop a real-time fraud scoring API
-
-## License
-
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
-## Acknowledgements
-
-- Dataset by [Vala Khorasani](https://www.kaggle.com/datasets/valakhorasani/bank-transaction-dataset-for-fraud-detection) (Kaggle, Apache 2.0)
-- Built with [scikit-learn](https://scikit-learn.org/), [Folium](https://python-visualization.github.io/folium/), and [Seaborn](https://seaborn.pydata.org/)
